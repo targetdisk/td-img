@@ -143,6 +143,7 @@ def main():
             print("ERROR: image data type not implemented!!", file=stderr)
             pixmap.close()
             data_header.close()
+            return 1
 
         data_header.write(
             "pixmap_t "
