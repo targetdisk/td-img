@@ -7,8 +7,15 @@ from sys import stderr, exit
 imgtypes = ["RAW", "RLE", "RLE1"]
 
 config = {}
-with open(file="config.json", mode="r") as jfile:
-    config = j.load(jfile)
+try:
+    with open(file="config.json", mode="r") as jfile:
+        config = j.load(jfile)
+except FileNotFoundError:
+    print(
+        'ERROR: "config.json" not found in current working directory!',
+        file=stderr,
+    )
+    exit(1)
 
 
 def split_colors(color):
