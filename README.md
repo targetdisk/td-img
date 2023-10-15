@@ -45,5 +45,5 @@ Target Disk Image (`.TDI`) files are RIFF files that can contain `RLE` and
 |------|-------------|----------------|----|
 | big  |  `char *`   |    Chunk ID    | 4  |
 |little|  `uint32_t` | Sub-chunk size | 4  |
-|little| `uint32_t *`|   Chunk size   | *  |
+|little| `uint32_t *`|     Data       | *  |
 
