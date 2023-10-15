@@ -201,6 +201,10 @@ uint32_t rle1_encode( pixmap_t *in, pixmap_t *out )
     uint32_t packed = 0;
     char pixel, *last_pixel = NULL, count = 0, n_packed = 0;
 
+#   ifdef VISUAL_RLE1_DBG
+      size_t pixel_no = 0, y = 0;
+#   endif /* VISUAL_RLE1_DBG */
+
     for ( int p;; )
     {
       fseek( in->data, 3, SEEK_CUR );
@@ -208,28 +212,47 @@ uint32_t rle1_encode( pixmap_t *in, pixmap_t *out )
       p = fgetc( in->data );
 
       if ( p == EOF )
+      {
+        puts("\nEOF");
+
         break;
+      }
 
       pixel = p & 1;
+
+#     ifdef VISUAL_RLE1_DBG
+        pixel_no++;
+
+        if ( ! ( pixel_no % 21 ) && ! ( y % 21 ) )
+          printf( "%c", ( pixel ? '#' : ' ' ) );
+
+        if ( ! ( pixel_no % in->height ) )
+        {
+          y++;
+
+          if ( ! ( y % 21 ) )
+            putc( '\n', stdout );
+        }
+#     endif /* VISUAL_RLE1_DBG */
 
       if ( last_pixel )
       {
         if ( pixel != *last_pixel )
         {
-          pack( ( *last_pixel << 7 ) + n_packed, &packed, &n_packed, putfunc, out->data, &chunk_sz );
+          pack( ( *last_pixel << 7 ) + count, &packed, &n_packed, putfunc, out->data, &chunk_sz );
 
-          n_packed = 1;
+          count = 1;
           *last_pixel = pixel;
         }
         else if ( pixel == *last_pixel )
         {
-          n_packed++;
+          count++;
 
-          if ( n_packed == 127 )
+          if ( count == 127 )
           {
-            pack( ( *last_pixel << 7 ) + n_packed, &packed, &n_packed, putfunc, out->data, &chunk_sz );
+            pack( ( *last_pixel << 7 ) + count, &packed, &n_packed, putfunc, out->data, &chunk_sz );
 
-            n_packed = 0;
+            count = 0;
 
             free( last_pixel );
 
@@ -242,14 +265,14 @@ uint32_t rle1_encode( pixmap_t *in, pixmap_t *out )
         last_pixel = malloc( 1 );
         *last_pixel = pixel;
 
-        n_packed = 1;
+        count = 1;
       }
     }
 
-    pack( ( *last_pixel << 7 ) + n_packed, &packed, &n_packed, putfunc, out->data, &chunk_sz );
+    pack( ( *last_pixel << 7 ) + count, &packed, &n_packed, putfunc, out->data, &chunk_sz );
 
     while ( n_packed )
-      pack( ( *last_pixel << 7 ) + n_packed, &packed, &n_packed, putfunc, out->data, &chunk_sz );
+      pack( 0, &packed, &n_packed, putfunc, out->data, &chunk_sz );
   }
 
   if ( out->datatype == RLE1_STREAM )

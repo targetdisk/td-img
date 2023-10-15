@@ -1,6 +1,8 @@
 *.tdi
 img_data.h
 
+*.ascii
+
 README.html
 pub.css
 
