@@ -15,8 +15,6 @@ void decompress( pixmap_t *pixmap );
 uint32_t rle1_encode( pixmap_t *in, pixmap_t *out );
 
 uint32_t encode( pixmap_t *in, pixmap_t *out );
-uint32_t decode( pixmap_t *in, pixmap_t *out );
-
-/* TODO encode() and decode() */
+uint32_t decode( pixmap_t *in, pixmap_t *out ); /* TODO */
 
 #endif /* CODEC_H */
