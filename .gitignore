@@ -11,3 +11,6 @@ rgba2rle1
 rgba2raw
 
 crud
+*.swp
+*.swo
+*.swn
