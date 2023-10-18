@@ -24,7 +24,6 @@ int main ( int argc, char *argv[] )
 {
   pixmap_t in, out;
 
-  char datatype;
   uint32_t file_size = 0;
   FILE *outfile = NULL;
 
