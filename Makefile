@@ -1,12 +1,9 @@
-UNAME = $(shell uname)
-ifeq ($(UNAME),Linux)
-	OPEN=xdg-open
-endif
+CFLAGS ?= -Wall -std=c99
 
 ### TARGETS ####################################################################
 
 rgba2rle1: rgba2rle1.c codec.c
-	$(CC) $? -o $@
+	$(CC) $(CFLAGS) $? -o $@
 
 rgba2rle: rgba2rle1
 	ln -s $< $@
@@ -15,6 +12,11 @@ rgba2raw: rgba2rle1
 	ln -s $< $@
 
 ### README #####################################################################
+
+UNAME = $(shell uname)
+ifeq ($(UNAME),Linux)
+	OPEN=xdg-open
+endif
 
 pub.css:
 	wget https://github.com/manuelp/pandoc-stylesheet/raw/acac36b976966f76544176161ba826d519b6f40c/pub.css

@@ -12,18 +12,34 @@
 #define FLIP_UI16(n)  (  \
     ((n & 0xFF00) >> 8) | ((n & 0xFF) << 8))
 
-#if __BYTE_ORDER__ == BIG_ENDIAN
-#  define LE_UI32(n)  (FLIP_UI32(n))
-#  define BE_UI32(n)  (n)
-#  define LE_UI16(n)  (FLIP_UI16(n))
-#  define BE_UI16(n)  (n)
-#elif __BYTE_ORDER__ == LITTLE_ENDIAN
-#  define LE_UI32(n)  (n)
-#  define BE_UI32(n)  (FLIP_UI32(n))
-#  define LE_UI16(n)  (n)
-#  define BE_UI16(n)  (FLIP_UI16(n))
+#if defined( __APPLE__ )
+#  if defined( __BIG_ENDIAN__ )
+#    define LE_UI32(n)  (FLIP_UI32(n))
+#    define BE_UI32(n)  (n)
+#    define LE_UI16(n)  (FLIP_UI16(n))
+#    define BE_UI16(n)  (n)
+#  elif defined( __LITTLE_ENDIAN__ )
+#    define LE_UI32(n)  (n)
+#    define BE_UI32(n)  (FLIP_UI32(n))
+#    define LE_UI16(n)  (n)
+#    define BE_UI16(n)  (FLIP_UI16(n))
+#  else
+#    error "Unsupported C compiler, sorry!"
+#  endif
 #else
-#  error "Unsupported C compiler, sorry!"
+#  if __BYTE_ORDER__ == BIG_ENDIAN
+#    define LE_UI32(n)  (FLIP_UI32(n))
+#    define BE_UI32(n)  (n)
+#    define LE_UI16(n)  (FLIP_UI16(n))
+#    define BE_UI16(n)  (n)
+#  elif __BYTE_ORDER__ == LITTLE_ENDIAN
+#    define LE_UI32(n)  (n)
+#    define BE_UI32(n)  (FLIP_UI32(n))
+#    define LE_UI16(n)  (n)
+#    define BE_UI16(n)  (FLIP_UI16(n))
+#  else
+#    error "Unsupported C compiler, sorry!"
+#  endif
 #endif
 
 #endif /* ORDER_H */
