@@ -2,7 +2,13 @@ CFLAGS ?= -Wall -std=c99
 
 ### TARGETS ####################################################################
 
-rgba2rle1: rgba2rle1.c codec.c
+codec.a: codec.o
+	$(AR) -rcs $@ $<
+
+codec.o: codec.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+rgba2rle1: rgba2rle1.c codec.o
 	$(CC) $(CFLAGS) $? -o $@
 
 rgba2rle: rgba2rle1
@@ -31,7 +37,7 @@ README: README.html
 ### ETC ########################################################################
 
 clean:
-	@rm -fv rgba2raw rgba2rle rgba2rle1 README.html
+	@rm -fv rgba2raw rgba2rle rgba2rle1 codec.o codec.a README.html
 
 all: rgba2rle1 rgba2rle rgba2raw
 

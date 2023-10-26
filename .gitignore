@@ -9,6 +9,8 @@ pub.css
 rgba2rle
 rgba2rle1
 rgba2raw
+*.o
+*.a
 
 crud
 *.swp
