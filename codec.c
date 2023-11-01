@@ -169,6 +169,8 @@ void put_stream( uint32_t number, void *outfile, uint32_t *chk_sz )
 static
 void put_pixmap( uint32_t number, void *outfile, uint32_t *chk_sz )
 {
+  (void)number;
+  (void)outfile;
   (void)chk_sz;
 
   /* TODO */
