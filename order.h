@@ -27,12 +27,12 @@
 #    error "Unsupported C compiler, sorry!"
 #  endif
 #else
-#  if __BYTE_ORDER__ == BIG_ENDIAN
+#  if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 #    define LE_UI32(n)  (FLIP_UI32(n))
 #    define BE_UI32(n)  (n)
 #    define LE_UI16(n)  (FLIP_UI16(n))
 #    define BE_UI16(n)  (n)
-#  elif __BYTE_ORDER__ == LITTLE_ENDIAN
+#  elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #    define LE_UI32(n)  (n)
 #    define BE_UI32(n)  (FLIP_UI32(n))
 #    define LE_UI16(n)  (n)
