@@ -158,6 +158,7 @@ void pack( char byte, uint32_t *packed, char *n_packed, void (*putfunc)( uint32_
   }
 }
 
+#ifndef _UEFI_H_
 static
 void put_stream( uint32_t number, void *outfile, uint32_t *chk_sz )
 {
@@ -176,7 +177,6 @@ void put_pixmap( uint32_t number, void *outfile, uint32_t *chk_sz )
   /* TODO */
 }
 
-#ifndef _UEFI_H_
 uint32_t rle1_encode( pixmap_t *in, pixmap_t *out )
 {
   void (*putfunc)( uint32_t, void *, uint32_t * );
