@@ -12,9 +12,11 @@ void rle_decompress( pixmap_t *pixmap );
 void rle1_decompress( pixmap_t *pixmap );
 void decompress( pixmap_t *pixmap );
 
+#ifndef _UEFI_H_
 uint32_t rle1_encode( pixmap_t *in, pixmap_t *out );
 
 uint32_t encode( pixmap_t *in, pixmap_t *out );
 uint32_t decode( pixmap_t *in, pixmap_t *out ); /* TODO */
+#endif  /* _UEFI_H_ */
 
 #endif /* CODEC_H */

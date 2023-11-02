@@ -176,6 +176,7 @@ void put_pixmap( uint32_t number, void *outfile, uint32_t *chk_sz )
   /* TODO */
 }
 
+#ifndef _UEFI_H_
 uint32_t rle1_encode( pixmap_t *in, pixmap_t *out )
 {
   void (*putfunc)( uint32_t, void *, uint32_t * );
@@ -300,3 +301,4 @@ uint32_t encode( pixmap_t *in, pixmap_t *out )
       return rle1_encode( in, out );
   }
 }
+#endif  /* _UEFI_H_ */
