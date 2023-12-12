@@ -1,6 +1,5 @@
-#include <errno.h>
-
 #ifndef _UEFI_H_
+# include <errno.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -136,7 +135,7 @@ void decompress( pixmap_t *pixmap )
     default:
       fprintf( stderr, "ERROR: image data type not implemented!!\n" );
 
-      exit( EPROTONOSUPPORT );
+      exit( EINVAL );
   }
 }
 
