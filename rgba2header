@@ -111,7 +111,7 @@ def main():
         "#ifdef _UEFI_H_\n"
         + '#include "gfx.h"\n'
         + "#else\n"
-        + '#include "trident.h"\n'
+        + '#include "pixmap.h"\n'
         + "#endif\n"
     )
     data_header.write("#define BG_R  " + config["bg_color"][0] + "\n")
